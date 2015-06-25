@@ -1,18 +1,22 @@
 public class Solution {
-    public int removeDuplicates(int[] nums) {
-        if (nums.length == 0) return 0;
-        if (nums.length == 1) return 1;
-        int count = 0;
-        for (int i = 0; i < nums.length - 1; i++) {//attention range
-            while (nums[i] == nums[i + 1]) {
-                i++;
-                if (i == nums.length - 1) break;
+    public int strStr(String haystack, String needle) {
+        if (haystack == null || needle == null || needle.length() > haystack.length()) return -1;
+        if (needle.equals("")) return 0;
+        int n1 = haystack.length();
+        int n2 = needle.length();
+        int index = 0;
+        for (int i = 0; i < n1 - n2 + 1; i++) {
+            if (haystack.charAt(i) == needle.charAt(index)) {
+                boolean judge = true;
+                for (int j = 1; j < n2; j++) {
+                    if (haystack.charAt(i + j) != needle.charAt(j)) {
+                        judge = false;
+                        break;
+                    }
+                }
+                if (judge) return i;
             }
-            //count;
-            nums[count++] = nums[i];
         }
-        if (nums[count - 1] != nums[nums.length - 1]) 
-            nums[count++] = nums[nums.length - 1];
-        return count;
+        return -1;
     }
 }
